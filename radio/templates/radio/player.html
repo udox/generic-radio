@@ -1,12 +1,24 @@
 <div class="radioplayer">
     <div class="logo"><img src="{{ skin.radio_logo.url }}" alt="Radio Logo" /></div>
     <div class="main-show">
-        {% if main_show.series %}<h2>{{ main_show.series.name }}</h2>{% endif %}
+        {% if main_show.series %}<h2>{{ main_show.series.title }}</h2>{% endif %}
         <h3>{{ main_show.title }}</h3>
         {% if main_show.live_description %}<div class="description">{{ main_show.live_description }}</div>{% endif %}
         {% if main_show.live_picture %}<image class="showpic" src="{{ main_show.live_picture }}" />{% endif %}
+        <div class="show-links">
+            {% if main_show.media %}<a href="{{ main_show.media.url }}">play</a>{% endif %}
+            {% if main_show.allow_download %}
+                <img class="download-icon" src="{% if skin.download_icon %}{{ skin.download_icon.url }}{% else %}{% endif %}">
+                <a href="{{ main_show.download_link }}">Download</a>
+            {% endif %}
+            {% if main_show.allow_embed %}
+                <img class="embed-icon" src="{% if skin.embed_icon %}{{ skin.embed_icon.url }}{% else %}{% endif %}">
+                <a href="{{ main_show.embed_link }}">Embed</a>
+            {% endif %}
+        </div>
     </div>
     <div class="show-list">
+        <h2>Latest shows</h2>
         <ul>
         {% for show in shows %}
             <li>
