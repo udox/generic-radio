@@ -1,0 +1,14 @@
+.radioplayer ul {
+    list-style:none;
+    margin:0;
+}
+.radioplayer .show-list, .radioplayer .main-show {
+    float:left;
+    width:300px;
+}
+.radioplayer .player-banner {
+    clear:both;
+}
+.radioplayer .main-show .showpic {
+    max-width:100px;
+}
