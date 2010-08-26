@@ -14,5 +14,9 @@ $('.showname').bind('click', function() {
     $('#ms-picture').attr('src', showData.picture);
     $('#ms-description').html(showData.description);
     $('#ms-show-title').html(showData.title);
-    $('#ms-series-title').html(showData.series_title);
+    if(!showData.series_title) {
+        $('#ms-series-title').html(showData.title);
+    } else {
+        $('#ms-series-title').html(showData.series_title);
+    }
 });

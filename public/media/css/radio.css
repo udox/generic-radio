@@ -79,8 +79,8 @@ h2 {
     text-transform:uppercase;
     margin-bottom:6px;
     border-bottom:solid 1px #f8f181;
-    font-size:12px;
-    font-weight:bold;
+    font-size:12px !important;
+    font-weight:bold !important;
 }
 h2#latest-title{
     color:#deeff4;
@@ -97,4 +97,10 @@ h2#latest-title{
 }
 .main-show-breakdown {
     margin-top:16px;
+}
+#ms-show-title {
+    font-size:11px;
+    font-weight:bold;
+    line-height:11px;
+    text-transform:uppercase;
 }
