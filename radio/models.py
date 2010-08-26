@@ -168,3 +168,31 @@ class Show(models.Model):
     @models.permalink
     def get_absolute_url(self):
         return ('radio:play', (), {'object_id': self.pk})
+
+    @property
+    def short_title(self):
+        if self.title:
+            return self.title
+        elif self.series:
+            return self.series.title
+        elif self.subtitle:
+            return self.subtitle
+        else:
+            return ''
+
+    @property
+    def full_title(self):
+        if self.series:
+            if self.title:
+                return '%s - %s' % (self.series.title, self.title)
+            elif self.subtitle:
+                return '%s - %s' % (self.series.title, self.subtitle)
+        elif self.title:
+            if self.subtitle:
+                return '%s - %s' % (self.title, self.subtitle)
+            else:
+                return self.title
+        elif self.subtitle:
+            return self.subtitle
+        else:
+            return ''

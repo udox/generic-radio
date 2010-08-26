@@ -9,7 +9,7 @@
         <h2 id="ms-series-title">{% if main_show.series %}{{ main_show.series.title }}{% else %}{{ main_show.title }}{% endif %}</h2>
         <div class="main-show-breakdown">
             <image id="ms-picture" src="{% if main_show.live_picture %}{{ main_show.live_picture }}{% endif %}" />
-            <h3 id="ms-show-title">{{ main_show.title }}</h3>
+            <h3 id="ms-show-title">{{ main_show.short_title }}</h3>
             <div id="ms-description">{% if main_show.live_description %}{{ main_show.live_description }}{% endif %}</div>
             <div class="ms-player">
                 {% comment %}<img class="play-icon" src="{% if skin.play_show_icon %}{{ skin.play_show_icon.url }}{% else %}{% endif %}" alt="Play show" />{% endcomment %}
@@ -36,7 +36,7 @@
                 {% else %}
                     <img src="TODO: default" />
                 {% endif %}
-                <span class="showname">{{ show.title }}</span>
+                <span class="showname">{{ show.full_title }}</span>
                 <div class="jsondata">{{ show.json_data }}</div>
             </li>
         {% endfor %}

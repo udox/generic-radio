@@ -13,7 +13,11 @@ $('.showname').bind('click', function() {
     var showData = eval('('+$(this).next('.jsondata').html()+')');
     $('#ms-picture').attr('src', showData.picture);
     $('#ms-description').html(showData.description);
-    $('#ms-show-title').html(showData.title);
+    if(showData.subtitle) {
+        $('#ms-show-title').html(showData.subtitle);
+    } else {
+        $('#ms-show-title').html(showData.title);
+    }
     if(!showData.series_title) {
         $('#ms-series-title').html(showData.title);
     } else {
