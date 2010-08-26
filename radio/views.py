@@ -25,3 +25,11 @@ def showdump(request):
 
 def player(request):
     return render_to_response('debug.html', context_instance=RequestContext(request))
+
+def embed(request, object_id):
+    show = get_object_or_404(Show, pk=object_id)
+    return render_to_response('radio/embed.html', context_instance=RequestContext(request))
+
+def download(request, object_id):
+    show = get_object_or_404(Show, pk=object_id)
+    return render_to_response('radio/download.html', context_instance=RequestContext(request))
