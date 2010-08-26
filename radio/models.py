@@ -1,5 +1,6 @@
 from django.db import models
 from django.template.defaultfilters import lower, slugify
+from django.utils.safestring import mark_safe
 from datetime import datetime
 from radio.managers import ShowManager
 from django.utils import simplejson
@@ -152,6 +153,7 @@ class Show(models.Model):
         """ Returns the show as a json array for pulling in via jQuery """
         data = {
             'title': self.title,
+            'series_title': None,
             'subtitle': self.subtitle,
             'description': self.description,
             'picture': self.live_picture,
@@ -159,7 +161,9 @@ class Show(models.Model):
         }
         if self.media:
             data.update(dict(media=self.media.url))
-        return simplejson.dumps(data)
+        if self.series:
+            data.update(dict(series_title=self.series.title))
+        return mark_safe(simplejson.dumps(data))
 
     @models.permalink
     def get_absolute_url(self):
