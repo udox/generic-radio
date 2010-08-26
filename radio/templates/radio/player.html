@@ -1,5 +1,10 @@
 <div class="radioplayer">
-    <div class="logo"><img src="{{ skin.radio_logo.url }}" alt="Radio Logo" /></div>
+    <div class="header">
+        <img src="{{ skin.radio_logo.url }}" alt="Radio Logo" />
+        <div class="flash-player">
+            {% include 'radio/blocks/flashplayer.html' %}
+        </div>
+    </div>
     <div class="main-show">
         {% if main_show.series %}<h2>{{ main_show.series.title }}</h2>{% endif %}
         <h3>{{ main_show.title }}</h3>
