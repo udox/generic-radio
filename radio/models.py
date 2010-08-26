@@ -109,8 +109,10 @@ class Show(models.Model):
     description.verbose_name = 'Show description'
     description.help_text = ''
     picture = models.ImageField(upload_to='uploads/radio/show/', blank=True, null=True)
-    media = models.FileField(upload_to='uploads/radio/mp3/', blank=True, null=True) # TODO: default to NOT null! :)
-    media.help_text = 'The mp3 file.'
+    media_url = models.URLField(upload_to='uploads/radio/mp3/', blank=True, null=True)
+    media_url.help_text = 'If the file is located at an external URL enter it here'
+    media = models.FileField(upload_to='uploads/radio/mp3/', blank=True, null=True)
+    media.help_text = 'If you are hosting the file on this server (or however the model defines its storage backend) upload it here.'
     show_sponsor = models.ForeignKey(Sponsor, blank=True, null=True)
     series = models.ForeignKey(Series, blank=True, null=True)
     allow_download = models.BooleanField(default=True)
@@ -194,5 +196,24 @@ class Show(models.Model):
                 return self.title
         elif self.subtitle:
             return self.subtitle
+        else:
+            return ''
+
+    @property
+    def flash_player(self):
+        file_url = None
+        if self.media:
+            file_url = self.media
+        if self.media_url:
+            file_url = self.media_url
+
+        if file_url:
+            return mark_safe("""
+            <object classid="clsid:D27CDB6E-AE6D-11cf-96B8-444553540000" width="250" height="20" codebase="http://download.macromedia.com/pub/shockwave/cabs/flash/swflash.cab">
+                <param name="movie" value="/media/swf/singlemp3player.swf?file=%(media)s&amp;autoStart=false&amp;backColor=000000&amp;frontColor=ffffff&amp;songVolume=90" />
+                <param name="wmode" value="transparent" />
+                <embed wmode="transparent" width="250" height="20" src="/media/swf/singlemp3player.swf?file=%(media)s&amp;autoStart=false&amp;backColor=000000&amp;frontColor=ffffff&amp;songVolume=90" type="application/x-shockwave-flash" pluginspage="http://www.macromedia.com/go/getflashplayer" /></embed>
+            </object>
+            """ % {'media': file_url})
         else:
             return ''

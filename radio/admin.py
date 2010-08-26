@@ -9,7 +9,7 @@ class RadioAdmin(admin.ModelAdmin):
         ('Show Information', {'fields': ('title', 'series', 'subtitle',
             'description', 'picture', 'more_info_url')}),
         ('Status & Dates', {'fields': ('status', 'go_live',)}),
-        ('Media', {'fields': ('media',)}),
+        ('Media', {'fields': ('media_url', 'media',)}),
         ('Sponsoring', {'fields': ('show_sponsor',)}),
         ('Options', {'fields': ('allow_download', 'allow_embed')}),
     )
