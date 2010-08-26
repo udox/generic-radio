@@ -65,6 +65,8 @@
 #ms-description {
     width:170px;
     float:left;
+    font-size:10px;
+    line-height:11px;
 }
 .jsondata {
     display:none;
@@ -77,6 +79,8 @@ h2 {
     text-transform:uppercase;
     margin-bottom:6px;
     border-bottom:solid 1px #f8f181;
+    font-size:12px;
+    font-weight:bold;
 }
 h2#latest-title{
     color:#deeff4;
