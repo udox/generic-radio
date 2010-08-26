@@ -45,4 +45,5 @@ def radio_banner(player_link=None):
         'series': series,
         'player_title': PLAYER_TITLE,
         'player_leadin': PLAYER_LEADIN,
+        'MEDIA_URL': settings.MEDIA_URL,
     }

@@ -108,7 +108,7 @@ class Show(models.Model):
     description.verbose_name = 'Show description'
     description.help_text = ''
     picture = models.ImageField(upload_to='uploads/radio/show/', blank=True, null=True)
-    media = models.FileField(upload_to='mp3', blank=True, null=True) # TODO: default to NOT null! :)
+    media = models.FileField(upload_to='uploads/radio/mp3/', blank=True, null=True) # TODO: default to NOT null! :)
     media.help_text = 'The mp3 file.'
     show_sponsor = models.ForeignKey(Sponsor, blank=True, null=True)
     series = models.ForeignKey(Series, blank=True, null=True)
@@ -155,6 +155,9 @@ class Show(models.Model):
             'subtitle': self.subtitle,
             'description': self.description,
             'picture': self.live_picture,
+            'media': None,
         }
+        if self.media:
+            data.update(dict(media=self.media.url))
         return simplejson.dumps(data)
 
