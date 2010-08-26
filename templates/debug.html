@@ -6,8 +6,19 @@
     <title>spine radio test</title>
     <link href="{{ MEDIA_URL }}css/radio.css" rel="stylesheet" />
     <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="http://yui.yahooapis.com/2.8.1/build/reset/reset-min.css">
+    <style type="text/css">
+        html {
+            background:url('/media/images/bg.png') repeat;
+        }
+        #container {
+            width:555px;
+            margin:100px auto;
+        }
+    </style>
 </head>
 <body>
+    <div id="container">
 
     <h1>The Generic Radio Player Build!</h1>
 
@@ -19,6 +30,7 @@
     <h2>Lets render out the banner!</h2>
     <div id="radio-banner">
         {% radio_banner %}
+    </div>
     </div>
 </body>
 </html>

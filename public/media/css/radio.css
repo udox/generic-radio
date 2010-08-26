@@ -1,8 +1,13 @@
+
+* {
+    color:#fff;
+
+}
 .radioplayer {
-    width:700px;
+    width:555px;
 }
 .radioplayer div {
-    border:solid 1px #000;
+/*    border:solid 1px #000;*/
 }
 .radioplayer ul {
     list-style:none;
@@ -10,7 +15,19 @@
 }
 .radioplayer .show-list, .radioplayer .main-show {
     float:left;
-    width:300px;
+    width:254px;
+    background:#000;
+    margin-right:7px;
+    -webkit-border-radius: 5px;
+    -moz-border-radius: 5px;
+    border-radius: 5px;
+    padding:10px;
+    height:193px;
+    overflow:hidden;
+    margin-bottom:8px;
+}
+.radioplayer .show-list {
+    margin-right:0;
 }
 .radioplayer .flash-player {
     float:right;
@@ -19,9 +36,14 @@
 }
 .radioplayer .player-banner {
     clear:both;
+    margin-left:-1px;
 }
 .radioplayer .main-show #ms-picture {
-    max-width:100px;
+    max-width:70px;
+    max-height:62px;
+    height:62px;
+    width:70px;
+    border:solid 1px #f8f181;
 }
 
 .jsondata {
@@ -29,4 +51,14 @@
 }
 .showname {
     cursor:pointer;
+}
+h2 {
+    color:#f8f181;
+    text-transform:uppercase;
+    margin-bottom:6px;
+    border-bottom:solid 1px #f8f181;
+}
+h2#latest-title{
+    color:#deeff4;
+    border-bottom:solid 1px #deeff4;
 }
