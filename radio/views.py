@@ -1,5 +1,5 @@
 from django.shortcuts import render_to_response
-from django.http import HttpResponse
+from django.http import HttpResponse, Http404
 from django.template import RequestContext
 from django.shortcuts import get_object_or_404
 from django.core import serializers
@@ -33,3 +33,11 @@ def embed(request, object_id):
 def download(request, object_id):
     show = get_object_or_404(Show, pk=object_id)
     return render_to_response('radio/download.html', context_instance=RequestContext(request))
+
+def play(request, object_id):
+    show = get_object_or_404(Show, pk=object_id)
+    if show.media:
+        return HttpResponse(json.dumps(dict(show=show.media.url)), mimetype='application/json')
+    else:
+        raise Http404
+

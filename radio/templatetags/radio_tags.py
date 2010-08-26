@@ -32,6 +32,7 @@ def radio_player():
         'shows': shows,
         'skin': skin,
         'main_show': main_show,
+        'MEDIA_URL': settings.MEDIA_URL,
     }
 
 @register.inclusion_tag('radio/banner.html')

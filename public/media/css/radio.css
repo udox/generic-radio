@@ -20,6 +20,13 @@
 .radioplayer .player-banner {
     clear:both;
 }
-.radioplayer .main-show .showpic {
+.radioplayer .main-show #ms-picture {
     max-width:100px;
+}
+
+.jsondata {
+    display:none;
+}
+.showname {
+    cursor:pointer;
 }

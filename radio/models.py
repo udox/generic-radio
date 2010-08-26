@@ -161,3 +161,6 @@ class Show(models.Model):
             data.update(dict(media=self.media.url))
         return simplejson.dumps(data)
 
+    @models.permalink
+    def get_absolute_url(self):
+        return ('radio:play', (), {'object_id': self.pk})
