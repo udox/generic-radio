@@ -15,3 +15,26 @@ Generic Radio - The udox "I need something to play and control mp3s and
 someone will need to manage this cos I'm not doing it" django + flash app
 
 This will be used for spinetv at first.
+
+Installation
+------------
+
+Add 'radio' to your installed apps. In your root url conf add the following:
+
+    (r'^radio$', include('radio.urls', namespace='radio')),
+
+It is important you include the namespace as this is used in templates for
+reversing urls. If you need to rename that then you'll need to update the
+templates and any reverse calls.
+
+Settings
+--------
+
+In your settings.py file you can set the following variables which will be
+used in the templates for the banner and player titles:
+
+    RADIO_SHOWLIST_LIMIT: The number of shows to load up in the latest list
+    RADIO_SERIES_LIMIT: How many series items to show on the banner
+    RADIO_RANDOM_SERIES: Whether to randomise the list of series on the banner
+    RADIO_PLAYER_TITLE: The main title to use in the templates for this player
+    RADIO_PLAYER_LEADIN: Used for the subtext under the radio banner heading
