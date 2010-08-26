@@ -5,8 +5,14 @@ from django.conf import settings
 register = Library()
 
 SHOWLIST_LIMIT = 10
+SERIES_LIMIT = 5
+RANDOM_SERIES = True
 if hasattr(settings, 'RADIO_SHOWLIST_LIMIT'):
     SHOWLIST_LIMIT = settings['RADIO_SHOWLIST_LIMIT']
+if hasattr(settings, 'RADIO_SERIES_LIMIT'):
+    SERIES_LIMIT = settings['RADIO_SERIES_LIMIT']
+if hasattr(settings, 'RADIO_RANDOM_SERIES '):
+    RANDOM_SERIES = settings['RADIO_RANDOM_SERIES ']
 
 @register.inclusion_tag('radio/player.html')
 def radio_player():
@@ -23,7 +29,10 @@ def radio_player():
 @register.inclusion_tag('radio/banner.html')
 def radio_banner(player_link=None):
     """ Renders out a banner for linking through to the player """
-
+    series = Series.objects.all()
+    if RANDOM_SERIES:
+        series = series.order_by('?')
+    series = series[:SERIES_LIMIT]
     return {
-
+        'series': series,
     }
