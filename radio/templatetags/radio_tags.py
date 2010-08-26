@@ -7,12 +7,20 @@ register = Library()
 SHOWLIST_LIMIT = 10
 SERIES_LIMIT = 5
 RANDOM_SERIES = True
+PLAYER_TITLE = 'Spine Radio'
+PLAYER_LEADIN = 'New shows every month from...'
+
+# Ok, starting to think should automate the below... #lazycoder
 if hasattr(settings, 'RADIO_SHOWLIST_LIMIT'):
     SHOWLIST_LIMIT = settings['RADIO_SHOWLIST_LIMIT']
 if hasattr(settings, 'RADIO_SERIES_LIMIT'):
     SERIES_LIMIT = settings['RADIO_SERIES_LIMIT']
 if hasattr(settings, 'RADIO_RANDOM_SERIES '):
     RANDOM_SERIES = settings['RADIO_RANDOM_SERIES ']
+if hasattr(settings, 'RADIO_PLAYER_TITLE'):
+    PLAYER_TITLE = settings['RADIO_PLAYER_TITLE']
+if hasattr(settings, 'RADIO_PLAYER_LEADIN'):
+    PLAYER_LEADIN = settings['RADIO_PLAYER_LEADIN']
 
 @register.inclusion_tag('radio/player.html')
 def radio_player():
@@ -35,4 +43,6 @@ def radio_banner(player_link=None):
     series = series[:SERIES_LIMIT]
     return {
         'series': series,
+        'player_title': PLAYER_TITLE,
+        'player_leadin': PLAYER_LEADIN,
     }
