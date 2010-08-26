@@ -28,19 +28,21 @@
     </div>
     <div class="show-list">
         <h2 id="latest-title">Latest shows</h2>
-        <ul>
-        {% for show in shows %}
-            <li>
-                {% if skin.show_list_icon %}
-                    <img src="{{ skin.show_list_icon.url }}" />
-                {% else %}
-                    <img src="TODO: default" />
-                {% endif %}
-                <span class="showname">{{ show.full_title }}</span>
-                <div class="jsondata">{{ show.json_data }}</div>
-            </li>
-        {% endfor %}
-        </ul>
+        <div class="show-list-container">
+            <ul>
+            {% for show in shows %}
+                <li>
+                    {% if skin.show_list_icon %}
+                        <img src="{{ skin.show_list_icon.url }}" />
+                    {% else %}
+                        <img src="TODO: default" />
+                    {% endif %}
+                    <span class="showname">{{ show.full_title }}</span>
+                    <div class="jsondata">{{ show.json_data }}</div>
+                </li>
+            {% endfor %}
+            </ul>
+        </div>
     </div>
     <div class="player-banner">
         {% if skin.banner_url %}<a href="{{ skin.banner_url }}" target="_blank">{% endif %}

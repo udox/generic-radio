@@ -21,6 +21,7 @@
     font-size:10px;
     font-weight:bold;
     line-height:20px;
+    overflow:hidden;
 }
 .show-list ul li img {
     margin:4px 6px 0 0;
@@ -43,6 +44,10 @@
 }
 .radioplayer .show-list {
     margin-right:0;
+}
+.show-list-container {
+    overflow-y:scroll;
+    height:173px;
 }
 .radioplayer .flash-player {
     float:right;
@@ -79,7 +84,7 @@ h2 {
     text-transform:uppercase;
     margin-bottom:6px;
     border-bottom:solid 1px #f8f181;
-    font-size:12px !important;
+    font-size:14px !important;
     font-weight:bold !important;
     padding-bottom:6px !important;
 }
