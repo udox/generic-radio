@@ -6,12 +6,12 @@
         </div>
     </div>
     <div class="main-show">
-        {% if main_show.series %}<h2 id="ms-series-title">{{ main_show.series.title }}</h2>{% endif %}
+        <h2 id="ms-series-title">{% if main_show.series %}{{ main_show.series.title }}{% endif %}</h2>
         <h3 id="ms-show-title">{{ main_show.title }}</h3>
-        {% if main_show.live_description %}<div id="ms-description">{{ main_show.live_description }}</div>{% endif %}
-        {% if main_show.live_picture %}<image id="ms-picture" src="{{ main_show.live_picture }}" />{% endif %}
+        <div id="ms-description">{% if main_show.live_description %}{{ main_show.live_description }}{% endif %}</div>
+        <image id="ms-picture" src="{% if main_show.live_picture %}{{ main_show.live_picture }}{% endif %}" />
         <div class="show-links">
-            {% if main_show.media %}<a class="ms-play" href="{{ main_show.media.url }}">play</a>{% endif %}
+            <a class="ms-play" href="{% if main_show.media %}{{ main_show.media.url }}{% endif %}">play</a>
             {% if main_show.allow_download %}
                 <img class="download-icon" src="{% if skin.download_icon %}{{ skin.download_icon.url }}{% else %}{% endif %}">
                 <a id="ms-download" href="{{ main_show.download_link }}">Download</a>
