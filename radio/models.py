@@ -203,7 +203,7 @@ class Show(models.Model):
     def flash_player(self):
         file_url = None
         if self.media:
-            file_url = self.media
+            file_url = self.media.url
         if self.media_url:
             file_url = self.media_url
 

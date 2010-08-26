@@ -41,3 +41,9 @@ def play(request, object_id):
     else:
         raise Http404
 
+def get_bare_player(request, object_id):
+    show = get_object_or_404(Show, pk=object_id)
+    if show.media or show.media_url:
+        return HttpResponse(json.dumps(dict(show=show.flash_player)), mimetype='application/json')
+    else:
+        raise Http404
