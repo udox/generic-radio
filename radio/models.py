@@ -109,7 +109,7 @@ class Show(models.Model):
     description.verbose_name = 'Show description'
     description.help_text = ''
     picture = models.ImageField(upload_to='uploads/radio/show/', blank=True, null=True)
-    media_url = models.URLField(upload_to='uploads/radio/mp3/', blank=True, null=True)
+    media_url = models.URLField(verify_exists=False, blank=True, null=True)
     media_url.help_text = 'If the file is located at an external URL enter it here'
     media = models.FileField(upload_to='uploads/radio/mp3/', blank=True, null=True)
     media.help_text = 'If you are hosting the file on this server (or however the model defines its storage backend) upload it here.'
