@@ -1,7 +1,7 @@
 
 * {
     color:#fff;
-
+    font-family:Verdana;
 }
 .radioplayer {
     width:555px;
@@ -9,10 +9,24 @@
 .radioplayer div {
 /*    border:solid 1px #000;*/
 }
-.radioplayer ul {
+.show-list ul {
     list-style:none;
-    margin:0;
+    margin:16px 0 0 0;
 }
+.show-list ul li {
+    border-top:dotted 1px #808081;
+    height:16px;
+    margin-bottom:4px;
+    text-transform:uppercase;
+    font-size:10px;
+    font-weight:bold;
+    line-height:20px;
+}
+.show-list ul li img {
+    margin:4px 6px 0 0;
+    float:left;
+}
+
 .radioplayer .show-list, .radioplayer .main-show {
     float:left;
     width:254px;
@@ -25,6 +39,7 @@
     height:193px;
     overflow:hidden;
     margin-bottom:8px;
+    position:relative;
 }
 .radioplayer .show-list {
     margin-right:0;
@@ -44,8 +59,13 @@
     height:62px;
     width:70px;
     border:solid 1px #f8f181;
+    float:left;
+    margin-right:9px;
 }
-
+#ms-description {
+    width:170px;
+    float:left;
+}
 .jsondata {
     display:none;
 }
@@ -61,4 +81,16 @@ h2 {
 h2#latest-title{
     color:#deeff4;
     border-bottom:solid 1px #deeff4;
+}
+.main-show .show-links {
+    border-top:solid 1px #ccc;
+    position:absolute;
+    bottom:0;
+    left:0;
+    height:20px;
+    width:100%;
+    margin:10px;
+}
+.main-show-breakdown {
+    margin-top:16px;
 }
