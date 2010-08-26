@@ -88,16 +88,17 @@ h2#latest-title{
     border-bottom:solid 1px #deeff4;
 }
 .main-show .show-links {
-    border-top:solid 1px #ccc;
+    border-top:solid 1px #524c4a;
     position:absolute;
     bottom:0;
     left:0;
     height:20px;
-    width:100%;
+    width:250px;
     margin:10px;
     text-transform:uppercase;
     font-size:10px;
     font-weight:bold;
+    padding-top:10px;
 }
 .show-links img {
     margin-top:3px;
@@ -109,7 +110,7 @@ h2#latest-title{
     text-decoration:none;
     float:left;
     margin-top:3px;
-    margin-right:5px;
+    margin-right:11px;
 }
 .show-links a:hover {
     text-decoration:underline;
@@ -122,4 +123,5 @@ h2#latest-title{
     font-weight:bold;
     line-height:11px;
     text-transform:uppercase;
+    margin-bottom:9px;
 }
