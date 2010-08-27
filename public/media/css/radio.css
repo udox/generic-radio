@@ -2,6 +2,9 @@
 * {
     font-family:Verdana;
 }
+
+/* Player styles */
+
 .radioplayer {
     width:555px;
 }
@@ -145,4 +148,22 @@ h2#latest-title{
     height:100px;
     font-family:"Courier New";
     font-size:10px;
+}
+
+/* Banner tag styles */
+
+.radioplayer-banner {
+    float:left;
+    width:254px;
+    background:#000;
+    margin-right:7px;
+    -webkit-border-radius: 5px;
+    -moz-border-radius: 5px;
+    border-radius: 5px;
+    padding:10px;
+    height:193px;
+    overflow:hidden;
+    margin-bottom:8px;
+    position:relative;
+    color:#FFF;
 }
