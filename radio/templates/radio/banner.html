@@ -1,8 +1,12 @@
 <div class="radioplayer-banner">
-    <h1>{{ player_title }}</h1>
-    <h2>{{ player_leadin }}</h2>
-    {% for item in series %}
-        <h3>{{ item }}</h3>
-    {% endfor %}
-    <img src="{{ MEDIA_URL }}images/radio/playbutton.png" alt="Go and listen" />
+    <h2 id="radioplayer-banner-title">{{ player_title }}</h2>
+    <div class="banner-container">
+        <h2>{{ player_leadin }}</h2>
+        <div class="series-list">
+            {% for item in series %}
+                <h3>{{ item }}</h3>
+            {% endfor %}
+            <img src="{{ MEDIA_URL }}images/radio/playbutton.png" alt="Go and listen" id="listen-img" />
+        </div>
+    </div>
 </div>
