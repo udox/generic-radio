@@ -24,7 +24,7 @@ def showdump(request):
     return HttpResponse(json.dumps(dict(shows=return_data)))
 
 def player(request):
-    return render_to_response('debug.html', context_instance=RequestContext(request))
+    return render_to_response('radio/container.html', context_instance=RequestContext(request))
 
 def embed(request, object_id):
     show = get_object_or_404(Show, pk=object_id)
