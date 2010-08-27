@@ -167,6 +167,8 @@ class Show(models.Model):
             'picture': self.live_picture,
             'media': None,
             'flash_player_url': reverse('radio:play', kwargs={'object_id': self.pk}),
+            'embed_url': reverse('radio:embed', kwargs={'object_id': self.pk}),
+            'download_url': reverse('radio:download', kwargs={'object_id': self.pk}),
         }
         if self.media:
             data.update(dict(media=self.media.url))
@@ -217,6 +219,12 @@ class Show(models.Model):
         if self.media_url:
             return self.media_url
         return None
+
+    @property
+    def zipped_url(self):
+        """ Just drops the mp3 extension for a zip one (for now)"""
+        path = self.absolute_media_url
+        return path[:-3]+'zip'
 
     @property
     def flash_player(self):

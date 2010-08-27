@@ -26,4 +26,13 @@ $('.showname').bind('click', function() {
     $.get(showData.flash_player_url, function(data) {
         $('#ms-player').html(data);
     });
+    $('#ms-embed').attr('href', showData.embed_url);
+    $('#ms-download').attr('href', showData.download_url);
+});
+
+$('#ms-embed').bind('click', function(e) {
+    e.preventDefault();
+    $.get($(this).attr('href'), function(data) {
+        $('#show-embedcode').val(data);
+    });
 });

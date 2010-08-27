@@ -52,11 +52,11 @@
             <div class="show-links">
                 {% if main_show.allow_download %}
                     <img class="download-icon" src="{% if skin.download_icon %}{{ skin.download_icon.url }}{% else %}{% endif %}">
-                    <a id="ms-download" href="{{ main_show.download_link }}">Download</a>
+                    <a id="ms-download" href="{{ main_show.zipped_url }}" target="_blank">Download</a>
                 {% endif %}
                 {% if main_show.allow_embed %}
                     <img class="embed-icon" src="{% if skin.embed_icon %}{{ skin.embed_icon.url }}{% else %}{% endif %}">
-                    <a id="ms-embed" href="{{ main_show.embed_link }}">Embed</a>
+                    <a id="ms-embed" href="{% url radio:embed main_show.pk %}">Embed</a>
                 {% endif %}
             </div>
         </div>
@@ -88,6 +88,6 @@
 <div id="embed-info">
     <h2>Embeds</h2>
     <p>You can embed this show on your site using the following bit of html, just copy &amp; paste it in</p>
-    <textarea class="embed-code">{{ main_show.embed_code }}</textarea>
+    <textarea id="show-embedcode">{{ main_show.embed_code }}</textarea>
 </div>
 <script type="text/javascript" src="{{ MEDIA_URL }}js/radio.js"></script>

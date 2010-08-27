@@ -32,7 +32,7 @@ def embed(request, object_id):
 
 def download(request, object_id):
     show = get_object_or_404(Show, pk=object_id)
-    return HttpResponseRedirect(show.absolute_media_url)
+    return HttpResponseRedirect(show.zipped_url)
 
 def play(request, object_id):
     show = get_object_or_404(Show, pk=object_id)
