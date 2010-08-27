@@ -211,12 +211,16 @@ class Show(models.Model):
         return '<p><strong>%s</strong></p><p>%s</p>' % (self.full_title, self.live_description)
 
     @property
-    def flash_player(self):
-        file_url = None
+    def media_url(self):
         if self.media:
-            file_url = self.media.url
+            return self.media.url
         if self.media_url:
-            file_url = self.media_url
+            return self.media_url
+        return None
+
+    @property
+    def flash_player(self):
+        file_url = self.media_url
 
         if file_url:
             return mark_safe("""
