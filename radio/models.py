@@ -259,19 +259,33 @@ class Show(models.Model):
 
 class PodcastShow(models.Model):
     """ *Very* Simple model to hold a basic podcast """
-    artist = models.CharField(max_length=200)
     title = models.CharField(max_length=200)
+    author = models.CharField(max_length=200, blank=True, null=True)
+    subtitle = models.CharField(max_length=200, blank=True, null=True)
+    summary = models.TextField(blank=True, null=True)
     description = models.TextField(blank=True, null=True)
+    published_date = models.DateTimeField(blank=True, null=True)
     media = models.FileField(blank=True, null=True, upload_to='uploads/radio/podcasts/')
     media_url = models.URLField(verify_exists=False, blank=True, null=True)
+    duration = models.CharField(max_length=200, blank=True, null=True)
+    keywords = models.CharField(max_length=200, blank=True, null=True)
 
     def __unicode__(self):
         return '%s - %s' % (self.artist, self.title)
 
 class PodcastSeries(models.Model):
-    name = models.CharField(max_length=200)
+    title = models.CharField(max_length=200)
+    subtitle= models.CharField(max_length=200, blank=True, null=True)
     url = models.SlugField(max_length=50)
     url.help_text = 'Appended to create the XML url for iTunes or whatnot'
+    copyright = models.CharField(max_length=200, blank=True, null=True)
+    author = models.CharField(max_length=200, blank=True, null=True)
+    summary = models.TextField(blank=True, null=True)
+    description = models.TextField(blank=True, null=True)
+    owner_name = models.CharField(max_length=200, blank=True, null=True)
+    ownder_email = models.CharField(max_length=200, blank=True, null=True)
+    image = models.ImageField(upload_to='uploads/radio/podcast/', blank=True, null=True)
+    primary_category = models.CharField(max_length=255, blank=True, null=True)
 
     podcasts = models.ManyToManyField(PodcastShow)
 
@@ -279,5 +293,5 @@ class PodcastSeries(models.Model):
         return self.name
 
     class Meta:
-        verbose_name_plural = 'Podcast Series'
+        verbose_name_plural = 'Podcast series'
 

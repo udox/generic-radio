@@ -7,6 +7,7 @@ urlpatterns = patterns('radio.views',
     (r'^embed/(?P<object_id>\d+)/$', 'embed', {}, 'embed'),
     (r'^download/(?P<object_id>\d+)/$', 'download', {}, 'download'),
     (r'^play/(?P<object_id>\d+)/$', 'get_bare_player', {}, 'play'),
+    (r'^podcast/(?P<slug>[\w-]+)/$', 'podcast_xml', {}, 'podcast'),
 
     # Used to dump out full data for 3rd party apps
     (r'^json/$', 'showdump', {}, 'json'),

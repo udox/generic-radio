@@ -4,7 +4,7 @@ from django.template import RequestContext
 from django.shortcuts import get_object_or_404
 from django.core import serializers
 from django.utils import simplejson as json
-from radio.models import Show
+from radio.models import Show, PodcastSeries
 
 def showdump(request):
     """ Dumps out the show data as a JSON array for loading into other
@@ -47,3 +47,8 @@ def get_bare_player(request, object_id):
         return HttpResponse(show.flash_player)
     else:
         raise Http404
+
+def podcast_xml(request, slug):
+    podcast = get_object_or_404(PodcastSeries, url=slug)
+    return render_to_response('radio/podcast.xml', {'podcast': podcast},
+        mimetype='text/xml')
