@@ -1,6 +1,5 @@
 
 * {
-    color:#fff;
     font-family:Verdana;
 }
 .radioplayer {
@@ -8,6 +7,9 @@
 }
 .radioplayer div {
 /*    border:solid 1px #000;*/
+}
+.radioplayer .header {
+    margin-bottom:10px;
 }
 .show-list ul {
     list-style:none;
@@ -72,6 +74,8 @@
     float:left;
     font-size:10px;
     line-height:11px;
+    height:66px;
+    overflow:hidden;
 }
 .jsondata {
     display:none;
@@ -82,7 +86,7 @@
 h2 {
     color:#f8f181;
     text-transform:uppercase;
-    margin-bottom:6px;
+/*     margin-bottom:6px; */
     border-bottom:solid 1px #f8f181;
     font-size:14px !important;
     font-weight:bold !important;
@@ -103,7 +107,7 @@ h2#latest-title{
     text-transform:uppercase;
     font-size:10px;
     font-weight:bold;
-    padding-top:10px;
+    padding-top:4px;
 }
 .show-links img {
     margin-top:3px;
@@ -129,4 +133,13 @@ h2#latest-title{
     line-height:11px;
     text-transform:uppercase;
     margin-bottom:9px;
+}
+.ms-player {
+    position:absolute;
+    bottom:39px;
+    left:11px;
+    height:20px;
+}
+#embed-info textarea {
+    width:500px;
 }

@@ -2,7 +2,7 @@ from django.contrib import admin
 from radio.models import Show, Sponsor, Series, RadioSkin
 
 class RadioAdmin(admin.ModelAdmin):
-    list_display = ('title', 'created_at', 'media', 'status',)
+    list_display = ('full_title', 'created_at', 'media', 'status',)
     list_filter = ('title', 'created_at', 'status', )
 
     fieldsets = (
@@ -20,8 +20,8 @@ class SkinAdmin(admin.ModelAdmin):
     fieldsets = (
         (None, {'fields': ('name', 'prefer', 'created_at')}),
         ('Base Skin', {'fields': ('radio_logo', 'default_banner', 'banner_url',
-            'base_background', 'base_color', 'main_title_color', 'description_color',
-            'show_list_color',)
+            'base_background', 'base_color', 'main_title_color', 'secondary_title_color',
+            'description_color', 'show_list_color',)
         }),
         ('Icons', {'fields': ('embed_icon', 'download_icon', 'play_show_icon',
             'show_list_icon')}),

@@ -1,3 +1,37 @@
+<style type="text/css">
+    {% if skin.base_background %}
+    body {
+        background: url('{{ skin.base_background.url }}') repeat;
+    }
+    {% endif %}
+    .radioplayer .show-list, .radioplayer .main-show {
+        background:#{% if skin.base_color %}{{ skin.base_color }}{% endif %};
+        -webkit-border-radius: {{ skin.corner_radius }}px;
+        -moz-border-radius: {{ skin.corner_radius }}px;
+        border-radius: {{ skin.corner_radius }}px;
+    }
+    h2 {
+        color:#{{ skin.main_title_color }};
+        border-bottom:solid 1px #{{ skin.main_title_color }};
+    }
+    .show-links a {
+        color:#{{ skin.main_title_color }};
+    }
+    h2#latest-title{
+        color:#{{ skin.secondary_title_color }};
+        border-bottom:solid 1px #{{ skin.secondary_title_color }};
+    }
+    #ms-description, h3#ms-show-title {
+        color:#{{ skin.description_color }};
+    }
+    .show-list-container ul li {
+        color:#{{ skin.show_list_color }};
+    }
+    .radioplayer .main-show #ms-picture {
+        border: solid 1px #{{ skin.main_title_color }};
+    }
+</style>
+
 <div class="radioplayer">
     <div class="header">
         <img src="{{ skin.radio_logo.url }}" alt="Radio Logo" />
@@ -50,5 +84,10 @@
         <img src="{{ skin.default_banner.url }}" />
         {% if skin.banner_url %}</a>{% endif %}
     </div>
+</div>
+<div id="embed-info">
+    <h2>Embeds</h2>
+    <p>You can embed this show on your site using the following bit of html, just copy &amp; paste it in</p>
+    <textarea class="embed-code">{{ main_show.embed_code }}</textarea>
 </div>
 <script type="text/javascript" src="{{ MEDIA_URL }}js/radio.js"></script>

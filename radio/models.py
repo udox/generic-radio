@@ -4,6 +4,10 @@ from django.utils.safestring import mark_safe
 from datetime import datetime
 from radio.managers import ShowManager
 from django.utils import simplejson
+from django.contrib.sites.models import Site
+from django.conf import settings
+
+current_site = Site.objects.get(id=settings.SITE_ID)
 
 class RadioSkin(models.Model):
     """ Holds style & logo information for the player allowing skinning
@@ -21,10 +25,11 @@ class RadioSkin(models.Model):
     radio_logo = models.ImageField(upload_to='uploads/radio/skins/')
     default_banner = models.ImageField(upload_to='uploads/radio/skins/', blank=True, null=True)
     default_banner.help_text = 'Used if there is no current sponsor for a series/show'
-    banner_url = models.URLField(blank=True, null=True)
+    banner_url = models.URLField(blank=True, null=True, verify_exists=False)
     base_background = models.ImageField(upload_to='uploads/radio/skins/', blank=True, null=True)
     base_color = models.CharField(max_length=6, default='000000')
     main_title_color = models.CharField(max_length=6, default='FF0000')
+    secondary_title_color = models.CharField(max_length=6, default='FF0000')
     description_color = models.CharField(max_length=6, default='FFFFFF')
     corner_radius = models.IntegerField(default=10)
     rounded_corners = models.IntegerField(choices=CORNER_CHOICES, default=0)
@@ -101,7 +106,7 @@ class Show(models.Model):
     subtitle = models.CharField(max_length=255, blank=True, null=True)
     subtitle.help_text = 'Want something extra under the main series title?'
     status = models.PositiveSmallIntegerField(choices=STATUS_CHOICES, default=0)
-    created_at = models.DateTimeField(auto_now=True)
+    created_at = models.DateTimeField(auto_now_add=True)
     created_at.help_text = 'Shows are selected based on this date, it will always take the latest 4. If you want to re-order a show change this date.'
     go_live = models.DateTimeField(blank=True, null=True)
     go_live.help_text = 'Allows you to line up a show for a future date'
@@ -200,6 +205,10 @@ class Show(models.Model):
             return ''
 
     @property
+    def embed_info(self):
+        return '<p><strong>%s</strong></p><p>%s</p>' % (self.full_title, self.live_description)
+
+    @property
     def flash_player(self):
         file_url = None
         if self.media:
@@ -210,10 +219,27 @@ class Show(models.Model):
         if file_url:
             return mark_safe("""
             <object classid="clsid:D27CDB6E-AE6D-11cf-96B8-444553540000" width="250" height="20" codebase="http://download.macromedia.com/pub/shockwave/cabs/flash/swflash.cab">
-                <param name="movie" value="/media/swf/singlemp3player.swf?file=%(media)s&amp;autoStart=false&amp;backColor=000000&amp;frontColor=ffffff&amp;songVolume=90" />
+                <param name="movie" value="http://%(base_url)s/media/swf/singlemp3player.swf?file=%(media)s&amp;autoStart=false&amp;backColor=000000&amp;frontColor=ffffff&amp;songVolume=90" />
                 <param name="wmode" value="transparent" />
-                <embed wmode="transparent" width="250" height="20" src="/media/swf/singlemp3player.swf?file=%(media)s&amp;autoStart=false&amp;backColor=000000&amp;frontColor=ffffff&amp;songVolume=90" type="application/x-shockwave-flash" pluginspage="http://www.macromedia.com/go/getflashplayer" /></embed>
+                <embed wmode="transparent" width="250" height="20" src="http://%(base_url)s/media/swf/singlemp3player.swf?file=%(media)s&amp;autoStart=false&amp;backColor=000000&amp;frontColor=ffffff&amp;songVolume=90" type="application/x-shockwave-flash" pluginspage="http://www.macromedia.com/go/getflashplayer" /></embed>
             </object>
-            """ % {'media': file_url})
+            """ % {'media': file_url, 'base_url': current_site.domain})
         else:
             return ''
+
+    @property
+    def embed_code(self):
+        skin = RadioSkin.get_active()
+        player_code = self.flash_player
+        output = """<!-- Start Radio Embed --><table cellspacing="0" cellpadding="0" width="250">
+            <tr><td height="30"><a href="http://%(base_url)s" target="_blank"><img src="http://%(base_url)s%(logo)s" alt="Embedded from SpineTV" width="100" border="0" /></a></td>
+            <td valign="middle"><a style="font-family:Verdana; font-size:10px; font-weight:bold; text-decoration:none; color:#000;" href="http://%(base_url)s" target="_blank">Find out more at SpineTV</a></td>
+            </tr><tr><td colspan="2" style="padding-top:10px;">%(player)s</td></tr>
+            <tr><td colspan="2" style="padding-top:10px; font-size:10px; font-family:Verdana;">%(info)s</td></tr>
+            </table><!-- End Radio Embed -->""" % {
+                'player': player_code,
+                'base_url': current_site.domain,
+                'logo': skin.radio_logo.url,
+                'info': self.embed_info,
+            }
+        return output.strip()
