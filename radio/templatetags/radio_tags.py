@@ -26,11 +26,12 @@ if hasattr(settings, 'RADIO_PLAYER_LEADIN'):
 def radio_player(slug=None):
     """ Renders out the full player on site """
 
+    _series = None
     if slug:
         try:
             _series = Series.objects.get(url=slug)
         except Series.DoesNotExist:
-            _series = None
+            pass
 
     shows = Show.live.all()
     if _series:
