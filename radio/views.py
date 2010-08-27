@@ -4,7 +4,16 @@ from django.template import RequestContext
 from django.shortcuts import get_object_or_404
 from django.core import serializers
 from django.utils import simplejson as json
-from radio.models import Show, PodcastSeries
+from radio.models import Show, PodcastSeries, RadioSkin
+from django.conf import settings
+
+PLAYER_TITLE = None
+PAGE_TITLE = 'Spine Radio'
+
+if hasattr(settings, 'RADIO_PLAYER_TITLE'):
+    PLAYER_TITLE = settings['RADIO_PLAYER_TITLE']
+if hasattr(settings, 'RADIO_PAGE_TITLE'):
+    PAGE_TITLE = settings['RADIO_PAGE_TITLE']
 
 def showdump(request):
     """ Dumps out the show data as a JSON array for loading into other
@@ -24,7 +33,14 @@ def showdump(request):
     return HttpResponse(json.dumps(dict(shows=return_data)))
 
 def player(request):
-    return render_to_response('radio/container.html', context_instance=RequestContext(request))
+    skin = RadioSkin.get_active()
+    context = {
+        'page_title': PAGE_TITLE,
+        'player_title': PLAYER_TITLE,
+        'skin': skin,
+    }
+    return render_to_response('radio/container.html', context,
+        context_instance=RequestContext(request))
 
 def embed(request, object_id):
     show = get_object_or_404(Show, pk=object_id)

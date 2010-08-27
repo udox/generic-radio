@@ -143,6 +143,13 @@ h2#latest-title{
     left:11px;
     height:20px;
 }
+#embed-info {
+    margin:20px 0;
+}
+#embed-info p {
+    font-size:10px;
+    margin:10px 0;
+}
 #embed-info textarea {
     width:555px;
     height:100px;

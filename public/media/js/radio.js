@@ -9,7 +9,10 @@
    the eval call for a JSON.parse() at some point with the right JS included.
 */
 
+$('#embed-info').hide();
+
 $('.showname').bind('click', function() {
+    $('#embed-info').fadeOut();
     var showData = eval('('+$(this).next('.jsondata').html()+')');
     $('#ms-picture').attr('src', showData.picture);
     $('#ms-description').html(showData.description);
@@ -32,6 +35,7 @@ $('.showname').bind('click', function() {
 
 $('#ms-embed').bind('click', function(e) {
     e.preventDefault();
+    $('#embed-info').fadeIn();
     $.get($(this).attr('href'), function(data) {
         $('#show-embedcode').val(data);
     });

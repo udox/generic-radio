@@ -3,13 +3,13 @@
 <html lang="en">
 <head>
     <meta http-equiv="Content-Type" content="text/html;charset=UTF-8" />
-    <title>{{ player_title }}</title>
+    <title>{{ page_title }}</title>
     <link href="{{ MEDIA_URL }}css/radio.css" rel="stylesheet" />
     <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js"></script>
     <link rel="stylesheet" type="text/css" href="http://yui.yahooapis.com/2.8.1/build/reset/reset-min.css">
     <style type="text/css">
         html {
-            background:#ccc;
+            {% if skin.base_background %}background: url('{{ skin.base_background.url }}') repeat;{% endif %}
         }
         #container {
             width:555px;
@@ -19,7 +19,7 @@
 </head>
 <body>
     <div id="container">
-        {% if page_title %}<h1>{{ page_title }}</h1>{% endif %}
+        {% if player_title %}<h1>{{ player_title }}</h1>{% endif %}
         <div id="radio-player">
             {% radio_player %}
         </div>
