@@ -256,3 +256,28 @@ class Show(models.Model):
                 'info': self.embed_info,
             }
         return output.strip()
+
+class PodcastShow(models.Model):
+    """ *Very* Simple model to hold a basic podcast """
+    artist = models.CharField(max_length=200)
+    title = models.CharField(max_length=200)
+    description = models.TextField(blank=True, null=True)
+    media = models.FileField(blank=True, null=True, upload_to='uploads/radio/podcasts/')
+    media_url = models.URLField(verify_exists=False, blank=True, null=True)
+
+    def __unicode__(self):
+        return '%s - %s' % (self.artist, self.title)
+
+class PodcastSeries(models.Model):
+    name = models.CharField(max_length=200)
+    url = models.SlugField(max_length=50)
+    url.help_text = 'Appended to create the XML url for iTunes or whatnot'
+
+    podcasts = models.ManyToManyField(PodcastShow)
+
+    def __unicode__(self):
+        return self.name
+
+    class Meta:
+        verbose_name_plural = 'Podcast Series'
+

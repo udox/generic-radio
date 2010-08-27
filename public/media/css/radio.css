@@ -142,5 +142,7 @@ h2#latest-title{
 }
 #embed-info textarea {
     width:555px;
-    height:180px;
+    height:100px;
+    font-family:"Courier New";
+    font-size:10px;
 }

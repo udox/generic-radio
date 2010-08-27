@@ -1,5 +1,5 @@
 from django.contrib import admin
-from radio.models import Show, Sponsor, Series, RadioSkin
+from radio.models import Show, Sponsor, Series, RadioSkin, PodcastShow, PodcastSeries
 
 class RadioAdmin(admin.ModelAdmin):
     list_display = ('full_title', 'created_at', 'media', 'status',)
@@ -44,7 +44,12 @@ class SeriesAdmin(admin.ModelAdmin):
         ('Sponsoring', {'fields': ('series_sponsor',)}),
     )
 
+class PodcastAdmin(admin.ModelAdmin):
+    filter_horizontal = ('podcasts',)
+
 admin.site.register(Show, RadioAdmin)
 admin.site.register(Sponsor, SponsorAdmin)
 admin.site.register(Series, SeriesAdmin)
 admin.site.register(RadioSkin, SkinAdmin)
+admin.site.register(PodcastSeries, PodcastAdmin)
+admin.site.register(PodcastShow)
