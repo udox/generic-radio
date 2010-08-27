@@ -134,12 +134,13 @@ h2#latest-title{
     text-transform:uppercase;
     margin-bottom:9px;
 }
-.ms-player {
+#ms-player {
     position:absolute;
     bottom:39px;
     left:11px;
     height:20px;
 }
 #embed-info textarea {
-    width:500px;
+    width:555px;
+    height:180px;
 }

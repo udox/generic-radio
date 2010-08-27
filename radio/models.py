@@ -3,6 +3,7 @@ from django.template.defaultfilters import lower, slugify
 from django.utils.safestring import mark_safe
 from datetime import datetime
 from radio.managers import ShowManager
+from django.core.urlresolvers import reverse
 from django.utils import simplejson
 from django.contrib.sites.models import Site
 from django.conf import settings
@@ -165,6 +166,7 @@ class Show(models.Model):
             'description': self.description,
             'picture': self.live_picture,
             'media': None,
+            'flash_player_url': reverse('radio:play', kwargs={'object_id': self.pk}),
         }
         if self.media:
             data.update(dict(media=self.media.url))

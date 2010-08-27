@@ -28,7 +28,7 @@ def player(request):
 
 def embed(request, object_id):
     show = get_object_or_404(Show, pk=object_id)
-    return render_to_response('radio/embed.html', context_instance=RequestContext(request))
+    return HttpResponse(show.embed_code)
 
 def download(request, object_id):
     show = get_object_or_404(Show, pk=object_id)
@@ -44,6 +44,6 @@ def play(request, object_id):
 def get_bare_player(request, object_id):
     show = get_object_or_404(Show, pk=object_id)
     if show.media or show.media_url:
-        return HttpResponse(json.dumps(dict(show=show.flash_player)), mimetype='application/json')
+        return HttpResponse(show.flash_player)
     else:
         raise Http404

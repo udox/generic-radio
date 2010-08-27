@@ -23,4 +23,7 @@ $('.showname').bind('click', function() {
     } else {
         $('#ms-series-title').html(showData.series_title);
     }
+    $.get(showData.flash_player_url, function(data) {
+        $('#ms-player').html(data);
+    });
 });

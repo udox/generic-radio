@@ -45,7 +45,7 @@
             <image id="ms-picture" src="{% if main_show.live_picture %}{{ main_show.live_picture }}{% endif %}" />
             <h3 id="ms-show-title">{{ main_show.short_title }}</h3>
             <div id="ms-description">{% if main_show.live_description %}{{ main_show.live_description }}{% endif %}</div>
-            <div class="ms-player">
+            <div id="ms-player">
                 {% comment %}<img class="play-icon" src="{% if skin.play_show_icon %}{{ skin.play_show_icon.url }}{% else %}{% endif %}" alt="Play show" />{% endcomment %}
                 {{ main_show.flash_player }}
             </div>
