@@ -79,6 +79,8 @@ class Series(models.Model):
     title = models.CharField(max_length=255)
     picture = models.ImageField(upload_to='uploads/radio/series/')
     picture.help_text = 'The main series image, used if you don\'t give a particular show an image'
+    url = models.SlugField(unique=True)
+    url.help_text = 'A URL to use for loading this whole series in the player'
     description = models.TextField()
     description.verbose_name = 'Series description. If you don\'t update show text this will be used.'
     homepage = models.URLField(blank=True, null=True)
@@ -136,6 +138,13 @@ class Show(models.Model):
     def get_latest():
         try:
             return Show.live.all()[0]
+        except IndexError:
+            return None
+
+    @staticmethod
+    def get_latest_for_series(_series):
+        try:
+            return Show.live.all().filter(series=_series)[0]
         except IndexError:
             return None
 

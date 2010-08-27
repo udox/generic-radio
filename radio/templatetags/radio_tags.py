@@ -23,11 +23,26 @@ if hasattr(settings, 'RADIO_PLAYER_LEADIN'):
     PLAYER_LEADIN = settings['RADIO_PLAYER_LEADIN']
 
 @register.inclusion_tag('radio/player.html')
-def radio_player():
+def radio_player(slug=None):
     """ Renders out the full player on site """
-    shows = Show.live.all()[:SHOWLIST_LIMIT]
+
+    if slug:
+        try:
+            _series = Series.objects.get(url=slug)
+        except Series.DoesNotExist:
+            _series = None
+
+    shows = Show.live.all()
+    if _series:
+        shows = shows.filter(series=_series)
+    shows = shows[:SHOWLIST_LIMIT]
+
     skin = RadioSkin.get_active()
-    main_show = Show.get_latest()
+    if _series:
+        main_show = Show.get_latest_for_series(_series)
+    else:
+        main_show = Show.get_latest()
+
     return {
         'shows': shows,
         'skin': skin,

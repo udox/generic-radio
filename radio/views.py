@@ -42,6 +42,17 @@ def player(request):
     return render_to_response('radio/container.html', context,
         context_instance=RequestContext(request))
 
+def series(request, slug):
+    skin = RadioSkin.get_active()
+    context = {
+        'page_title': PAGE_TITLE,
+        'player_title': PLAYER_TITLE,
+        'skin': skin,
+        'slug': slug,
+    }
+    return render_to_response('radio/container.html', context,
+        context_instance=RequestContext(request))
+
 def embed(request, object_id):
     show = get_object_or_404(Show, pk=object_id)
     return HttpResponse(show.embed_code)

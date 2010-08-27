@@ -40,7 +40,7 @@ class SponsorAdmin(admin.ModelAdmin):
 
 class SeriesAdmin(admin.ModelAdmin):
     fieldsets = (
-        (None, {'fields': ('title', 'description', 'homepage', 'picture')}),
+        (None, {'fields': ('title', 'description', 'homepage', 'picture', 'url')}),
         ('Sponsoring', {'fields': ('series_sponsor',)}),
     )
 

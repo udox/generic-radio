@@ -21,7 +21,11 @@
     <div id="container">
         {% if player_title %}<h1>{{ player_title }}</h1>{% endif %}
         <div id="radio-player">
-            {% radio_player %}
+            {% if slug %}
+                {% radio_player slug %}
+            {% else %}
+                {% radio_player %}
+            {% endif %}
         </div>
     </div>
 </body>
