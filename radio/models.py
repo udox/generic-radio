@@ -211,7 +211,7 @@ class Show(models.Model):
         return '<p><strong>%s</strong></p><p>%s</p>' % (self.full_title, self.live_description)
 
     @property
-    def media_url(self):
+    def absolute_media_url(self):
         if self.media:
             return self.media.url
         if self.media_url:
@@ -220,8 +220,7 @@ class Show(models.Model):
 
     @property
     def flash_player(self):
-        file_url = self.media_url
-
+        file_url = self.absolute_media_url
         if file_url:
             return mark_safe("""
             <object classid="clsid:D27CDB6E-AE6D-11cf-96B8-444553540000" width="250" height="20" codebase="http://download.macromedia.com/pub/shockwave/cabs/flash/swflash.cab">
