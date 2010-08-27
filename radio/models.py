@@ -236,9 +236,9 @@ class Show(models.Model):
         if file_url:
             return mark_safe("""
             <object classid="clsid:D27CDB6E-AE6D-11cf-96B8-444553540000" width="250" height="20" codebase="http://download.macromedia.com/pub/shockwave/cabs/flash/swflash.cab">
-                <param name="movie" value="http://%(base_url)s/media/swf/singlemp3player.swf?file=http://%(base_url)s%(media)s&amp;autoStart=false&amp;backColor=000000&amp;frontColor=ffffff&amp;songVolume=90" />
+                <param name="movie" value="http://%(base_url)s/media/swfs/singlemp3player.swf?file=http://%(base_url)s%(media)s&amp;autoStart=false&amp;backColor=000000&amp;frontColor=ffffff&amp;songVolume=90" />
                 <param name="wmode" value="transparent" />
-                <embed wmode="transparent" width="250" height="20" src="http://%(base_url)s/media/swf/singlemp3player.swf?file=http://%(base_url)s%(media)s&amp;autoStart=false&amp;backColor=000000&amp;frontColor=ffffff&amp;songVolume=90" type="application/x-shockwave-flash" pluginspage="http://www.macromedia.com/go/getflashplayer" /></embed>
+                <embed wmode="transparent" width="250" height="20" src="http://%(base_url)s/media/swfs/singlemp3player.swf?file=http://%(base_url)s%(media)s&amp;autoStart=false&amp;backColor=000000&amp;frontColor=ffffff&amp;songVolume=90" type="application/x-shockwave-flash" pluginspage="http://www.macromedia.com/go/getflashplayer" /></embed>
             </object>
             """ % {'media': file_url, 'base_url': current_site.domain})
         else:
