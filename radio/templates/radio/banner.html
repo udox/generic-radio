@@ -1,12 +1,14 @@
-<div class="radioplayer-banner">
-    <h2 id="radioplayer-banner-title">{{ player_title|safe }}</h2>
+<div class="radioplayer-banner" onclick="window.open('{% url radio:player %}', 'SpineRadio','toolbar=no,location=no,directories=no,status=no,menubar=no,scrollbars=no,resizeable=yes,width=600,height=450');">
+    <h2 id="radioplayer-banner-title"><span>{{ player_title }}</span></h2>
     <div class="banner-container">
         <h2>{{ player_leadin }}</h2>
         <div class="series-list">
             {% for item in series %}
                 <h3>{{ item }}</h3>
             {% endfor %}
-            <img src="{{ MEDIA_URL }}images/radio/playbutton.png" alt="Go and listen" id="listen-img" />
+            <a onclick="window.open('{% url radio:player %}', 'SpineRadio','toolbar=no,location=no,directories=no,status=no,menubar=no,scrollbars=no,resizeable=yes,width=600,height=450');">
+                <img src="{{ MEDIA_URL }}images/radio/playbutton.png" alt="Go and listen" id="listen-img" />
+            </a>
         </div>
     </div>
 </div>

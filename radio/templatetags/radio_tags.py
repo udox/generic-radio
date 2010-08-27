@@ -1,5 +1,6 @@
 from django.template import Library
 from radio.models import Series, Show, Sponsor, RadioSkin
+from django.utils.safestring import mark_safe
 from django.conf import settings
 
 register = Library()
@@ -60,7 +61,7 @@ def radio_banner(player_link=None):
     series = series[:SERIES_LIMIT]
     return {
         'series': series,
-        'player_title': PLAYER_BANNER_TITLE,
-        'player_leadin': PLAYER_LEADIN,
+        'player_title': mark_safe(PLAYER_BANNER_TITLE),
+        'player_leadin': mark_safe(PLAYER_LEADIN),
         'MEDIA_URL': settings.MEDIA_URL,
     }

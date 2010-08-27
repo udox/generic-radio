@@ -86,7 +86,7 @@
 .showname {
     cursor:pointer;
 }
-h2 {
+.radioplayer h2 {
     color:#f8f181;
     text-transform:uppercase;
 /*     margin-bottom:6px; */
@@ -161,6 +161,7 @@ h2#latest-title{
 /* Banner tag styles */
 
 .radioplayer-banner {
+    cursor:pointer;
     float:left;
     width:407px;
     background:#000;
@@ -205,15 +206,25 @@ h2#latest-title{
     font-size:20px;
     line-height:20px;
     margin-bottom:0;
+    z-index:10;
+    position:relative;
 }
 #radioplayer-banner-title {
     color:#fccef3;
-    border-bottom:solid 1px #fccef3;
     margin-bottom:4px;
-    font-size:13px !important;
+    font-size:16px !important;
+}
+#radioplayer-banner-title span {
+    padding-bottom:5px;
+    border-bottom:solid 1px #fccef3;
+    display:inline-block;
 }
 #listen-img {
     position:absolute;
     bottom:10px;
     right:10px;
+    z-index:2;
+}
+.radioplayer-banner a {
+    cursor:pointer;
 }
