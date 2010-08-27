@@ -187,6 +187,7 @@ h2#latest-title{
     font-size:24px !important;
     line-height:26px;
     border-bottom:none;
+    text-shadow: #666 0 2px 3px;
 }
 .banner-container .series-list {
     -webkit-border-radius: 5px;

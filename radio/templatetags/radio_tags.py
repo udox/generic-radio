@@ -8,7 +8,7 @@ SHOWLIST_LIMIT = 10
 SERIES_LIMIT = 5
 RANDOM_SERIES = True
 PLAYER_BANNER_TITLE = 'Spine Radio'
-PLAYER_LEADIN = 'New shows every month from...'
+PLAYER_LEADIN = 'New shows<br>every month from...'
 
 # Ok, starting to think should automate the below... #lazycoder
 if hasattr(settings, 'RADIO_SHOWLIST_LIMIT'):
