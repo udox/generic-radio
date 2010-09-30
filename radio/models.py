@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 from django.db import models
 from django.template.defaultfilters import lower, slugify
 from django.utils.safestring import mark_safe
@@ -166,6 +167,18 @@ class Show(models.Model):
         else:
             return None
 
+    @property
+    def live_sponsor(self):
+        """Returns the banner image to be used for this show so"""
+        if self.show_sponsor:
+            return dict(image=self.show_sponsor.banner_image.url, \
+                url=self.show_sponsor.outgoing_url)
+        elif self.series and self.series.series_sponsor:
+            return dict(image=self.series.series_sponsor.banner_image.url, \
+                url=self.series.series_sponsor.outgoing_url)
+        else:
+            return dict(image=None, url=None)
+
     def json_data(self):
         """ Returns the show as a json array for pulling in via jQuery """
         data = {
@@ -178,6 +191,8 @@ class Show(models.Model):
             'flash_player_url': reverse('radio:play', kwargs={'object_id': self.pk}),
             'embed_url': reverse('radio:embed', kwargs={'object_id': self.pk}),
             'download_url': reverse('radio:download', kwargs={'object_id': self.pk}),
+            'sponsor_image': self.live_sponsor['image'],
+            'sponsor_url': self.live_sponsor['url'],
         }
         if self.media:
             data.update(dict(media=self.media.url))
@@ -284,7 +299,7 @@ class PodcastShow(models.Model):
     keywords = models.CharField(max_length=200, blank=True, null=True)
 
     def __unicode__(self):
-        return '%s - %s' % (self.artist, self.title)
+        return '%s - %s' % (self.author, self.title)
 
 class PodcastSeries(models.Model):
     title = models.CharField(max_length=200)
@@ -303,7 +318,7 @@ class PodcastSeries(models.Model):
     podcasts = models.ManyToManyField(PodcastShow)
 
     def __unicode__(self):
-        return self.name
+        return self.title
 
     class Meta:
         verbose_name_plural = 'Podcast series'

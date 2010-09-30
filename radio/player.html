@@ -1,0 +1,93 @@
+<style type="text/css">
+    {% if skin.base_background %}
+    body {
+        background: url('{{ skin.base_background.url }}') repeat;
+    }
+    {% endif %}
+    .radioplayer .show-list, .radioplayer .main-show {
+        background:#{% if skin.base_color %}{{ skin.base_color }}{% endif %};
+        -webkit-border-radius: {{ skin.corner_radius }}px;
+        -moz-border-radius: {{ skin.corner_radius }}px;
+        border-radius: {{ skin.corner_radius }}px;
+    }
+    h2 {
+        color:#{{ skin.main_title_color }};
+        border-bottom:solid 1px #{{ skin.main_title_color }};
+    }
+    .show-links a {
+        color:#{{ skin.main_title_color }};
+    }
+    h2#latest-title{
+        color:#{{ skin.secondary_title_color }};
+        border-bottom:solid 1px #{{ skin.secondary_title_color }};
+    }
+    #ms-description, h3#ms-show-title {
+        color:#{{ skin.description_color }};
+    }
+    .show-list-container ul li {
+        color:#{{ skin.show_list_color }};
+    }
+    .radioplayer .main-show #ms-picture {
+        border: solid 1px #{{ skin.main_title_color }};
+    }
+</style>
+
+<div class="radioplayer">
+    <div class="header">
+        <img src="{{ skin.radio_logo.url }}" alt="Radio Logo" />
+        <div class="flash-player">
+            {% include 'radio/blocks/flashplayer.html' %}
+        </div>
+    </div>
+    <div class="main-show">
+        <h2 id="ms-series-title">{% if main_show.series %}{{ main_show.series.title }}{% else %}{{ main_show.title }}{% endif %}</h2>
+        <div class="main-show-breakdown">
+            <image id="ms-picture" src="{% if main_show.live_picture %}{{ main_show.live_picture }}{% endif %}" />
+            <h3 id="ms-show-title">{{ main_show.short_title }}</h3>
+            <div id="ms-description" class="scroll-pane grey-bar holder">{% if main_show.live_description %}{{ main_show.live_description }}{% endif %}</div>
+            <div id="ms-player">
+                {% comment %}<img class="play-icon" src="{% if skin.play_show_icon %}{{ skin.play_show_icon.url }}{% else %}{% endif %}" alt="Play show" />{% endcomment %}
+                {{ main_show.flash_player }}
+            </div>
+            <div class="show-links">
+                {% if main_show.allow_download %}
+                    <img class="download-icon" src="{% if skin.download_icon %}{{ skin.download_icon.url }}{% else %}{% endif %}">
+                    <a id="ms-download" href="{{ main_show.download_url }}" target="_blank">Download</a>
+                {% endif %}
+                {% if main_show.allow_embed %}
+                    <img class="embed-icon" src="{% if skin.embed_icon %}{{ skin.embed_icon.url }}{% else %}{% endif %}">
+                    <a id="ms-embed" href="{% url radio:embed main_show.pk %}">Embed</a>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+    <div class="show-list">
+        <h2 id="latest-title">Latest shows</h2>
+
+            <ul class="scroll-pane grey-bar holder">
+            {% for show in shows %}
+                <li>
+                    {% if skin.show_list_icon %}
+                        <img src="{{ skin.show_list_icon.url }}" />
+                    {% else %}
+                        <img src="TODO: default" />
+                    {% endif %}
+                    <span class="showname">{{ show.full_title }}</span>
+                    <div class="jsondata">{{ show.json_data }}</div>
+                </li>
+            {% endfor %}
+            </ul>
+
+    </div>
+    <div class="player-banner">
+        {% if skin.banner_url %}<a href="{{ skin.banner_url }}" target="_blank" id="sponsor-link">{% endif %}
+        <img src="{{ skin.default_banner.url }}" id="sponsor-banner" />
+        {% if skin.banner_url %}</a>{% endif %}
+    </div>
+</div>
+<div id="embed-info">
+    <h2>Embed Code</h2>
+    <p>You can embed this show on your site using the following bit of html, just copy &amp; paste it in</p>
+    <textarea id="show-embedcode">{{ main_show.embed_code }}</textarea>
+</div>
+<script type="text/javascript" src="{{ MEDIA_URL }}js/radio.js"></script>
