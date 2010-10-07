@@ -1,5 +1,6 @@
+# -*- coding: utf-8 -*-
 from django.shortcuts import render_to_response
-from django.http import HttpResponse, Http404, HttpResponseRedirect
+from django.http import HttpResponse, Http404, HttpResponseRedirect, HttpResponseForbidden
 from django.template import RequestContext
 from django.shortcuts import get_object_or_404
 from django.core import serializers
@@ -59,6 +60,13 @@ def embed(request, object_id):
 
 def download(request, object_id):
     show = get_object_or_404(Show, pk=object_id)
+    if show.allow_download:
+        return HttpResponseRedirect(show.absolute_media_url)
+    else:
+        return HttpResponseForbidden()
+
+def playing(request, object_id):
+    show = get_object_or_404(Show, pk=object_id)
     return HttpResponseRedirect(show.absolute_media_url)
 
 def play(request, object_id):
@@ -77,5 +85,6 @@ def get_bare_player(request, object_id):
 
 def podcast_xml(request, slug):
     podcast = get_object_or_404(PodcastSeries, url=slug)
-    return render_to_response('radio/podcast.xml', {'podcast': podcast},
+    base_domain = 'http://www.spinetv.net' # HACKALERT! TODO: pull from sites
+    return render_to_response('radio/podcast.xml', {'podcast': podcast, 'base_domain': base_domain },
         mimetype='text/xml')

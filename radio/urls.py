@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 from django.conf.urls.defaults import patterns
 from radio.views import *
 
@@ -6,6 +7,7 @@ urlpatterns = patterns('radio.views',
     # the media accesses and what's being done
     (r'^embed/(?P<object_id>\d+)/$', 'embed', {}, 'embed'),
     (r'^download/(?P<object_id>\d+)/$', 'download', {}, 'download'),
+    (r'^fmedia/(?P<object_id>\d+)/$', 'playing', {}, 'playing'),
     (r'^play/(?P<object_id>\d+)/$', 'get_bare_player', {}, 'play'),
     (r'^podcast/(?P<slug>[\w-]+)/$', 'podcast_xml', {}, 'podcast'),
     (r'^series/(?P<slug>[\w-]+)/$', 'series', {}, 'series'),

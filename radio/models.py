@@ -66,7 +66,7 @@ class Sponsor(models.Model):
     player_skin.help_text = 'If this sponsor requests full rebranding of the player, add a skin and link it here'
     banner_image = models.ImageField(upload_to='uploads/radio/sponsors/')
     banner_image.help_text = 'Shows on the radio skin as the show or series is being played'
-    outgoing_url = models.URLField(blank=True, null=True)
+    outgoing_url = models.URLField(blank=True, null=True, verify_exists=False)
     outgoing_url.help_text = 'The external link to load when clicked'
     description = models.TextField(blank=True, null=True)
     valid_from = models.DateTimeField(blank=True, null=True)
@@ -193,6 +193,7 @@ class Show(models.Model):
             'download_url': reverse('radio:download', kwargs={'object_id': self.pk}),
             'sponsor_image': self.live_sponsor['image'],
             'sponsor_url': self.live_sponsor['url'],
+            'download': self.allow_download,
         }
         if self.media:
             data.update(dict(media=self.media.url))
@@ -255,8 +256,12 @@ class Show(models.Model):
         return reverse('radio:download', kwargs={'object_id': self.pk})
 
     @property
+    def play_url(self):
+        return reverse('radio:playing', kwargs={'object_id': self.pk})
+
+    @property
     def flash_player(self):
-        file_url = self.download_url
+        file_url = self.play_url
         if file_url:
             return mark_safe("""
             <object classid="clsid:D27CDB6E-AE6D-11cf-96B8-444553540000" width="250" height="20" codebase="http://download.macromedia.com/pub/shockwave/cabs/flash/swflash.cab">

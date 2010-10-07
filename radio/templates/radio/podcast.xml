@@ -1,32 +1,32 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <rss xmlns:itunes="http://www.itunes.com/dtds/podcast-1.0.dtd" version="2.0">
     <channel>
-        <title>{{ podcast.name }}</title>
+        <title>{{ podcast.title }}</title>
         <link>{{ podcast.get_absolute_url }}</link>
         <language>en-gb</language>
         <copyright>{{ podcast.copyright }}</copyright>
         <itunes:subtitle>{{ podcast.subtile }}</itunes:subtitle>
         <itunes:author>{{ podcast.author }}</itunes:author>
         <itunes:summary>{{ podcast.summary }}</itunes:summary>
+        <itunes:explicit>yes</itunes:explicit>
         <description>{{ podcast.description }}</description>
         <itunes:owner>
             <itunes:name>{{ podcast.owner_name }}</itunes:name>
             <itunes:email>{{ podcast.owner_email }}</itunes:email>
         </itunes:owner>
-        <itunes:image href="{{ podcast.image.url }}" />
-        <itunes:category text="{{ podcast.primary_category }}" />
+        {% if podcast.image %}<itunes:image href="{{ base_domain }}{{ podcast.image.url }}" />{% endif %}
+        {% if podcast.primary_category %}<itunes:category text="{{ podcast.primary_category }}" />{% endif %}
 
         {% for item in podcast.podcasts.all %}
         <item>
-            <title>Shake Shake Shake Your Spices</title>
-            <itunes:author>John Doe</itunes:author>
-            <itunes:subtitle>A short primer on table spices</itunes:subtitle>
-            <itunes:summary>This week we talk about salt and pepper shakers, comparing and contrasting pour rates, construction materials, and overall aesthetics. Come and join the party!</itunes:summary>
-            <enclosure url="http://example.com/podcasts/everything/AllAboutEverythingEpisode3.m4a" length="8727310" type="audio/x-m4a" />
-            <guid>http://example.com/podcasts/archive/aae20050615.m4a</guid>
-            <pubDate>Wed, 15 Jun 2005 19:00:00 GMT</pubDate>
-            <itunes:duration>7:04</itunes:duration>
-            <itunes:keywords>salt, pepper, shaker, exciting</itunes:keywords>
+            <title>{{ item.title }}</title>
+            <itunes:author>{{ item.author }}</itunes:author>
+            {% if item.subtitle %}<itunes:subtitle>{{ item.subtitle }}</itunes:subtitle>{% endif %}
+            {% if item.summary %}<itunes:summary>{{ item.summary }}</itunes:summary>{% endif %}
+            {% if item.media %}<enclosure url="{{ base_domain }}{{ item.media.url }}" {% if item.media_length %}length="8727310"{% endif %} type="audio/x-mp3" />
+            <guid>{{ base_domain }}{{ item.media.url }}</guid>{% endif %}
+            <pubDate>{{ item.published_date|date:"D, d M Y h:i:s" }} </pubDate>
+            {% if item.keywords %}<itunes:keywords>{{ item.keywords }}</itunes:keywords>{% endif %}
         </item>
         {% endfor %}
     </channel>

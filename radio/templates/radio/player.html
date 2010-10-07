@@ -44,27 +44,23 @@
         <div class="main-show-breakdown">
             <image id="ms-picture" src="{% if main_show.live_picture %}{{ main_show.live_picture }}{% endif %}" />
             <h3 id="ms-show-title">{{ main_show.short_title }}</h3>
-            <div id="ms-description">{% if main_show.live_description %}{{ main_show.live_description }}{% endif %}</div>
+            <div id="ms-description" class="scroll-pane grey-bar holder">{% if main_show.live_description %}{{ main_show.live_description }}{% endif %}</div>
             <div id="ms-player">
                 {% comment %}<img class="play-icon" src="{% if skin.play_show_icon %}{{ skin.play_show_icon.url }}{% else %}{% endif %}" alt="Play show" />{% endcomment %}
                 {{ main_show.flash_player }}
             </div>
             <div class="show-links">
-                {% if main_show.allow_download %}
-                    <img class="download-icon" src="{% if skin.download_icon %}{{ skin.download_icon.url }}{% else %}{% endif %}">
-                    <a id="ms-download" href="{{ main_show.zipped_url }}" target="_blank">Download</a>
-                {% endif %}
-                {% if main_show.allow_embed %}
-                    <img class="embed-icon" src="{% if skin.embed_icon %}{{ skin.embed_icon.url }}{% else %}{% endif %}">
-                    <a id="ms-embed" href="{% url radio:embed main_show.pk %}">Embed</a>
-                {% endif %}
+                <img class="download-icon {% if not main_show.allow_download %}radio-hidden{% endif %}" src="{% if skin.download_icon %}{{ skin.download_icon.url }}{% else %}{% endif %}">
+                <a id="ms-download" href="{{ main_show.download_url }}" target="_blank" class=" {% if not main_show.allow_download %}radio-hidden{% endif %}">Download</a>
+                <img class="embed-icon" src="{% if skin.embed_icon %}{{ skin.embed_icon.url }}{% else %}{% endif %}">
+                <a id="ms-embed" href="{% url radio:embed main_show.pk %}">Embed</a>
             </div>
         </div>
     </div>
     <div class="show-list">
         <h2 id="latest-title">Latest shows</h2>
-        <div class="show-list-container">
-            <ul>
+
+            <ul class="scroll-pane grey-bar holder">
             {% for show in shows %}
                 <li>
                     {% if skin.show_list_icon %}
@@ -77,11 +73,11 @@
                 </li>
             {% endfor %}
             </ul>
-        </div>
+
     </div>
     <div class="player-banner">
-        {% if skin.banner_url %}<a href="{{ skin.banner_url }}" target="_blank">{% endif %}
-        <img src="{{ skin.default_banner.url }}" />
+        {% if skin.banner_url %}<a href="{{ skin.banner_url }}" target="_blank" id="sponsor-link">{% endif %}
+        <img src="{{ skin.default_banner.url }}" id="sponsor-banner" />
         {% if skin.banner_url %}</a>{% endif %}
     </div>
 </div>

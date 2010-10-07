@@ -14,7 +14,8 @@ $(document).ready(function() {
     // Grab the first banner that is on the page - should be the skin banner
     var defaultSponsorImage = $('#sponsor-banner').attr('src');
     var defaultSponsorUrl = $('#sponsor-link').attr('href');
-
+    
+    $('.radio-hidden').hide(); // Hide anything on load that's not needed
     $('#embed-info').hide();
 
     $('.showname').bind('click', function() {
@@ -45,8 +46,18 @@ $(document).ready(function() {
         $.get(showData.flash_player_url, function(data) {
             $('#ms-player').html(data);
         });
+        
         $('#ms-embed').attr('href', showData.embed_url);
         $('#ms-download').attr('href', showData.download_url);
+        
+        if(showData.download) {
+            $('.download-icon').show();
+            $('#ms-download').show();
+        } else {
+            $('.download-icon').hide();
+            $('#ms-download').hide();
+        }
+        
     });
 
     $('#ms-embed').bind('click', function(e) {
