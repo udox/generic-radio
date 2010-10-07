@@ -27,6 +27,9 @@ It is important you include the namespace as this is used in templates for
 reversing urls. If you need to rename that then you'll need to update the
 templates and any reverse calls.
 
+Copy the files from the radio/media/ folder to your swf/js/css locations
+and update any paths as appropiate within the radio/container.html template.
+
 Settings
 --------
 
@@ -38,3 +41,4 @@ used in the templates for the banner and player titles:
     RADIO_RANDOM_SERIES: Whether to randomise the list of series on the banner
     RADIO_PLAYER_TITLE: The main title to use in the templates for this player
     RADIO_PLAYER_LEADIN: Used for the subtext under the radio banner heading
+
